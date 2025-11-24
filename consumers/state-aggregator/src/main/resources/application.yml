@@ -1,0 +1,41 @@
+server:
+  port: 8082
+management:
+  server:
+    port: 8080
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    prometheus:
+      enabled: true
+
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/observatory}
+    username: ${DB_USER:observatory}
+    password: ${DB_PASSWORD:observatory}
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 3
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      pool-name: ObservatoryPool
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
+    consumer:
+      group-id: state-aggregator
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
