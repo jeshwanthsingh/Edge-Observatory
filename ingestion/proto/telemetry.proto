@@ -1,0 +1,35 @@
+syntax = "proto3";
+package telemetry;
+option go_package = "./proto";
+option java_package = "dev.jeshwanth.observatory.telemetry";
+option java_multiple_files = true;
+
+enum DeviceType {
+  MAC_ENDPOINT = 0;
+  EDGE_NODE = 1;
+  IOT_SENSOR = 2;
+}
+
+message DeviceMetrics {
+  string device_id = 1;
+  DeviceType type = 2;
+  int64 timestamp_ms = 3;
+  double cpu_percent = 4;
+  double memory_percent = 5;
+  double battery_health = 6;
+  double network_latency_ms = 7;
+  bool os_compliant = 8;
+  string region = 9;
+}
+
+message IngestResponse {
+  bool accepted = 1;
+  string message = 2;
+}
+
+service TelemetryGateway {
+  rpc IngestMetrics(DeviceMetrics) 
+    returns (IngestResponse);
+  rpc IngestStream(stream DeviceMetrics) 
+    returns (stream IngestResponse);
+}
