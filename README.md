@@ -17,34 +17,7 @@ This repo is intentionally scoped as a portfolio-safe version of the project. Co
 
 ## Architecture
 
-```text
-Edge Probes / Load Generator
-        |
-        v
-Go Gateway (ingestion)
-        |
-        v
-Kafka (metrics-raw, metrics-anomaly, chaos-events)
-        |
-        +-------------------+
-        |                   |
-        v                   v
-Anomaly Detector      State Aggregator
-        |                   |
-        +---------+---------+
-                  |
-                  v
-             Chaos Logger
-                  |
-                  v
-        PostgreSQL + Redis + Prometheus
-                  |
-                  v
-               Grafana
-
-Chaos Controller -> injects failures
-Janitor -> performs remediation and logs recovery actions
-```
+![Architecture](docs/images/edge-observatory-architecture.png)
 
 ## Why It Exists
 
@@ -135,15 +108,15 @@ Add your screenshots here after export.
 
 ### Dashboard Overview
 
-`[Insert image: docs/images/dashboard-overview.png]`
+![Dashboard Overview](docs/images/grafana-live-metrics.png)
 
-### Failure Moment
+**Failure Moment**
 
-`[Insert image: docs/images/chaos-event-failure.png]`
+![Failure Moment](docs/images/chaos-event-failure.png)
 
-### Recovery / Healing
+**Recovery / Healing**
 
-`[Insert image: docs/images/recovery-trend.png]`
+![Recovery / Healing](docs/images/system-recovery.png)
 
 ## Engineering Focus
 
