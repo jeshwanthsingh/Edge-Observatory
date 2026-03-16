@@ -17,7 +17,7 @@ This repo is intentionally scoped as a portfolio-safe version of the project. Co
 
 ## Architecture
 
-![Architecture](docs/images/edge-observatory-architecture.png)
+![Architecture](docs/images/edge-observatory-architecture.png?v=2)
 
 ## Why It Exists
 
